@@ -72,7 +72,6 @@ module "vnet" {
   name     = "sbops-vnet"
   environment = "dev"
   resourceGroupName = azurerm_resource_group.sbops-rg.name
-  resourceGroupLocation = azurerm_resource_group.sbops-rg.location
   network_address_space = var.network_address_space
   sbops_subnet_address_name = var.sbops_subnet_address_name
   sbops_subnet_address_prefix = var.sbops_subnet_address_name
