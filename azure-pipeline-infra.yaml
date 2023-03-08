@@ -52,6 +52,8 @@ stages :
               backendServiceArm: '${{ variables.backendServiceArm }}'
               backendAzureRmResourceGroupName: '${{ variables.backendAzureRmResourceGroupName }}'
               backendAzureRmStorageAccountName: '${{ variables.backendAzureRmStorageAccountName }}'
+              backendAzureRmContainerName: '${{ variables.backendAzureRmContainerName }}'
+              backendAzureRmKey: '${{ variables.backendAzureRmKey }}'
           - task: TerraformTaskV2@2
             displayName: 'plan'
             condition: and(succeeded(), eq(variables['Action'], 'Plan'))
