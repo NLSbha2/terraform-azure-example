@@ -48,7 +48,6 @@ resource "azurerm_function_app" "sbops" {
   storage_account_name = azurerm_storage_account.sbopssa.name
   storage_account_access_key = azurerm_storage_account.sbopssa.primary_access_key
 
-  storage_connection_string = azurerm_storage_account.sbopssa.primary_connection_string
   app_settings = {
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.sbops.instrumentation_key
   }
