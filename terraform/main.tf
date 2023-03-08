@@ -11,7 +11,16 @@ resource "azurerm_resource_group" "sbops-rg" {
     Environment = var.environment
   }
 }
-
+resource "azurerm_app_service_plan" "sbops" {
+  name                = "azure-functions-sbops-service-plan"
+  location            = "westeurope"
+  resource_group_name = azurerm_resource_group.sbops-rg.name
+  kind                = "FunctionApp"
+  sku {
+    tier = "Dynamic"
+    size = "Y1"
+  }
+}
 resource "azurerm_application_insights" "sbops" {
   name                = "sbops-test-terraform-insights"
   location            = "westeurope"
@@ -35,6 +44,7 @@ resource "azurerm_function_app" "sbops" {
   name                      = "sbops-test-terraform"
   location                  = "westeurope"
   resource_group_name       = azurerm_resource_group.sbops-rg.name
+  app_service_plan_id       = azurerm_app_service_plan.sbops.id
   storage_account_name = azurerm_storage_account.sbopssa.name
   storage_account_access_key = azurerm_storage_account.sbopssa.primary_access_key
 
