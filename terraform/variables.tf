@@ -15,3 +15,18 @@ variable "environment" {
   type        = string
   description = "Environment"
 }
+
+variable "network_address_space" {
+}
+
+variable "sbops_subnet_address_prefix" {
+}
+
+variable "sbops_subnet_address_name" {
+}
+
+variable "appgw_subnet_address_prefix" {
+}
+
+variable "appgw_subnet_address_name" {
+}

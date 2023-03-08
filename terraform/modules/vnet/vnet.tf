@@ -10,10 +10,10 @@ resource "azurerm_virtual_network" "sbops_virtual_network" {
 }
 
 resource "azurerm_subnet" "sbopssubnet" {
-  name = var.aks_subnet_address_name
+  name = var.sbops_subnet_address_name
   resource_group_name  = var.resourceGroupName
   virtual_network_name = azurerm_virtual_network.sbops_virtual_network.name
-  address_prefixes = [var.aks_subnet_address_prefix]
+  address_prefixes = [var.sbops_subnet_address_prefix]
 }
 
 resource "azurerm_subnet" "appgw_subnet" {
