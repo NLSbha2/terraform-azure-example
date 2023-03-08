@@ -76,8 +76,8 @@ module "vnet" {
   network_address_space = var.network_address_space
   sbops_subnet_address_name = var.sbops_subnet_address_name
   sbops_subnet_address_prefix = var.sbops_subnet_address_name
-  appgw_subnet_address_name = var.appgw_subnet_address_name
-  appgw_subnet_address_prefix = var.appgw_subnet_address_prefix
+  appgw_subnet_address_name = var.subnet_address_name
+  appgw_subnet_address_prefix = var.subnet_address_prefix
 
 }
 

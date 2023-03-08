@@ -25,8 +25,8 @@ variable "sbops_subnet_address_prefix" {
 variable "sbops_subnet_address_name" {
 }
 
-variable "appgw_subnet_address_prefix" {
+variable "subnet_address_prefix" {
 }
 
-variable "appgw_subnet_address_name" {
+variable "subnet_address_name" {
 }
