@@ -28,6 +28,14 @@ resource "azurerm_application_insights" "sbops" {
   application_type    = "web"
 }
 
+module "acr" {
+  source   = "./modules/container-registryr"
+  name     = "sbopsacr"
+  environment = "dev"
+  resourceGroupName = azurerm_resource_group.sbops-rg.name
+  resourceGroupLocation = azurerm_resource_group.sbops-rg.location
+}
+
 
 resource "azurerm_storage_account" "sbopssa" {
   name                     = "sbopssatf"
@@ -51,4 +59,20 @@ resource "azurerm_function_app" "sbops" {
   app_settings = {
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.sbops.instrumentation_key
   }
+}
+//modules
+module "acr" {
+  source   = "./modules/container-registryr"
+  name     = "sbopsacr"
+  environment = "dev"
+  resourceGroupName = azurerm_resource_group.sbops-rg.name
+  resourceGroupLocation = azurerm_resource_group.sbops-rg.location
+}
+
+module "redis" {
+  source   = "modules/redis-cache"
+  name     = "sbops-redis"
+  environment = "dev"
+  resourceGroupName = azurerm_resource_group.sbops-rg.name
+  resourceGroupLocation = azurerm_resource_group.sbops-rg.location
 }
