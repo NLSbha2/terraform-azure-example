@@ -67,3 +67,19 @@ module "redis" {
   resourceGroupName = azurerm_resource_group.sbops-rg.name
   resourceGroupLocation = azurerm_resource_group.sbops-rg.location
 }
+module "vnet" {
+  source   = "./modules/vnet"
+  name     = "sbops-vnet"
+  environment = "dev"
+  resourceGroupName = azurerm_resource_group.sbops-rg.name
+  resourceGroupLocation = azurerm_resource_group.sbops-rg.location
+}
+
+module "azuresql" {
+  source   = "./modules/azure-sql"
+  name     = "mysbopssql"
+  environment = "dev"
+  subnet = module.vnet.sbops_subnet_id
+  resourceGroupName = azurerm_resource_group.sbops-rg.name
+  resourceGroupLocation = azurerm_resource_group.sbops-rg.location
+}
