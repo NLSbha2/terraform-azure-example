@@ -17,11 +17,11 @@ parameters:
 
 variables:
   - name: backendServiceArm
-    value: 'ShrutiBhatiaAzure'
+    value: 'Azure subscription 1(b6084cf2-c818-4cac-8fc3-acf27e582135)'
   - name: backendAzureRmResourceGroupName
-    value: 'sbdevopsterraform'
+    value: 'sbops-rg-1'
   - name: backendAzureRmStorageAccountName
-    value: 'sbopssatf'
+    value: 'sbdevopssta'
   - name: backendAzureRmContainerName
     value: 'sampletfstate'
   - name: backendAzureRmKey
@@ -49,11 +49,9 @@ stages :
               provider: 'azurerm'
               command: 'init'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
-              backendServiceArm: 'Azure subscription 1(b6084cf2-c818-4cac-8fc3-acf27e582135)'
-              backendAzureRmResourceGroupName: 'sbops-rg-1'
-              backendAzureRmStorageAccountName: 'sbdevopssta'
-              backendAzureRmContainerName: '${{ variables.backendAzureRmContainerName }}'
-              backendAzureRmKey: '${{ variables.backendAzureRmKey }}'
+              backendServiceArm: '${{ variables.backendServiceArm }}'
+              backendAzureRmResourceGroupName: '${{ variables.backendAzureRmResourceGroupName }}'
+              backendAzureRmStorageAccountName: '${{ variables.backendAzureRmStorageAccountName }}'
           - task: TerraformTaskV2@2
             displayName: 'plan'
             condition: and(succeeded(), eq(variables['Action'], 'Plan'))
@@ -82,7 +80,7 @@ stages :
             inputs:
               provider: 'azurerm'
               command: 'init'
-              backendServiceArm: '${{ variables.backendServiceArm }}'
+              backendServiceArm: '${{variables.backendServiceArm}}'
               backendAzureRmResourceGroupName: '${{ variables.backendAzureRmResourceGroupName }}'
               backendAzureRmStorageAccountName: '${{ variables.backendAzureRmStorageAccountName }}'
               backendAzureRmContainerName: '${{ variables.backendAzureRmContainerName }}'
