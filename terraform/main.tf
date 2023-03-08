@@ -62,7 +62,7 @@ resource "azurerm_function_app" "sbops" {
 }
 //modules
 module "acr" {
-  source   = "./modules/container-registryr"
+  source   = "./modules/container-registry"
   name     = "sbopsacr"
   environment = "dev"
   resourceGroupName = azurerm_resource_group.sbops-rg.name
@@ -70,7 +70,7 @@ module "acr" {
 }
 
 module "redis" {
-  source   = "modules/redis-cache"
+  source   = "./modules/redis-cache"
   name     = "sbops-redis"
   environment = "dev"
   resourceGroupName = azurerm_resource_group.sbops-rg.name
