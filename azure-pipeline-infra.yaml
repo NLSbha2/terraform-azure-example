@@ -17,11 +17,11 @@ parameters:
 
 variables:
   - name: backendServiceArm
-    value: 'sbdevopsterraform'
+    value: 'ShrutiBhatiaAzure'
   - name: backendAzureRmResourceGroupName
     value: 'sbdevopsterraform'
   - name: backendAzureRmStorageAccountName
-    value: 'sbdevopstfstate'
+    value: 'sbopssatf'
   - name: backendAzureRmContainerName
     value: 'sampletfstate'
   - name: backendAzureRmKey

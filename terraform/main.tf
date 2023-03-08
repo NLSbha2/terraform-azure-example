@@ -1,3 +1,9 @@
+
+# this line is important so that backend connection is extablished in the pipeline
+terraform {
+  backend "azurerm" {}
+}
+# Configure the Microsoft Azure Provider
 resource "azurerm_resource_group" "sbops-rg" {
   name     = "${var.name}-rg"
   location = var.location
@@ -5,9 +11,37 @@ resource "azurerm_resource_group" "sbops-rg" {
     Environment = var.environment
   }
 }
+resource "azurerm_app_service_plan" "sbops" {
+  name                = "azure-functions-sbops-service-plan"
+  location            = "westeurope"
+  resource_group_name = azurerm_resource_group.sbops-rg.name
+  kind                = "FunctionApp"
+  sku {
+    tier = "Dynamic"
+    size = "Y1"
+  }
+}
+resource "azurerm_application_insights" "sbops" {
+  name                = "miel-test-terraform-insights"
+  location            = "westeurope"
+  resource_group_name = azurerm_resource_group.sbops-rg.name
+  application_type    = "web"
+}
+resource "azurerm_function_app" "sbops" {
+  name                      = "miel-test-terraform"
+  location                  = "westeurope"
+  resource_group_name       = "resource_group_name"
+  app_service_plan_id       = azurerm_app_service_plan.sbops.id
+  storage_connection_string = "storage_connection_string"
+  app_settings = {
+    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.sbops.instrumentation_key
+  }
+}
+
+
 
 resource "azurerm_storage_account" "sbopssa" {
-  name                     = "sbopssatftest"
+  name                     = "sbopssatf"
   resource_group_name      = azurerm_resource_group.sbops-rg.name
   location                 = azurerm_resource_group.sbops-rg.location
   account_tier             = "Standard"
