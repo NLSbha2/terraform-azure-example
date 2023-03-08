@@ -25,9 +25,7 @@ variables:
   - name: backendAzureRmContainerName
     value: 'sampletfstate'
   - name: backendAzureRmKey
-    value: 'terraform.tfstate'
-  - name: terraform_version
-    value: '1.0.10'
+    value: 'fnE/WeQIKYYiZmL1lJmjicJrqtlfvLUURqnWCsg60C0Av37GvcRCCPghQJxBXIJINZJzg5AvDDFf+AStf5irmA=='
   - name: environment
     value: 'dev'
   - name: action
@@ -42,7 +40,7 @@ stages :
           - task: TerraformInstaller@0
             displayName: 'install'
             inputs:
-              terraformVersion: '${{ variables.terraform_version }}'
+              terraformVersion: latest
           - task: TerraformTaskV2@2
             displayName: 'init'
             inputs:
