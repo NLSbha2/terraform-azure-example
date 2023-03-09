@@ -17,7 +17,7 @@ resource "azurerm_sql_database" "sbopsdb" {
   name                = "${var.name}database"
   resource_group_name          = var.resourceGroupName
   location                     = var.resourceGroupLocation
-  server_name         =           azurerm_sql_server.sbopsserver.name
+  server_name         =         azurerm_sql_server.sbopsserver.name
 
   tags = {
     environment = var.environment
