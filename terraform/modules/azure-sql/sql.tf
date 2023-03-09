@@ -23,7 +23,18 @@ resource "azurerm_sql_database" "sbopsdb" {
     environment = var.environment
   }
 }
-
+resource "azurerm_subnet_service_endpoint_storage_policy" "sbops" {
+  name                = "sbops-sql-policy"
+  resource_group_name = var.resourceGroupName
+  location            = var.resourceGroupLocation
+  definition {
+    name        = "sbops-sql-service-endpoint"
+    description = "endpoint"
+    service_resources = [
+      azurerm_sql_database.sbopsdb.id,
+    ]
+  }
+}
 resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
   name                = "sql-vnet-rule"
   resource_group_name = var.resourceGroupName
