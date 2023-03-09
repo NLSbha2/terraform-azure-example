@@ -58,7 +58,7 @@ stages :
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              commandOptions: '-input=false -var environment=$(Environment) -var-file="../terraform/vars/$(Environment).tfvars"'
+              commandOptions: '-input=false -var environment=$(environment) -var-file="../terraform/vars/$(environment).tfvars"'
               environmentServiceNameAzureRM: '${{ variables.backendServiceArm }}'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
           - task: TerraformTaskV2@2
