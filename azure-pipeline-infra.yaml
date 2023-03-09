@@ -67,6 +67,7 @@ stages :
             inputs:
               provider: 'azurerm'
               command: 'apply'
+              commandOptions: '-input=false -var environment=$(environment) -var-file="../terraform/vars/$(environment).tfvars"'
               environmentServiceNameAzureRM: '${{ variables.backendServiceArm }}'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
 
@@ -92,5 +93,6 @@ stages :
             inputs:
               provider: 'azurerm'
               command: 'destroy'
+              commandOptions: '-input=false -var environment=$(environment) -var-file="../terraform/vars/$(environment).tfvars"'
               environmentServiceNameAzureRM: '${{ variables.backendServiceArm }}'
               workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/'
