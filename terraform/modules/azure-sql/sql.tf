@@ -26,7 +26,7 @@ resource "azurerm_sql_database" "sbopsdb" {
 
 resource "azurerm_sql_virtual_network_rule" "sqlvnetrule" {
   name                = "sql-vnet-rule"
-  resource_group_name = var.resourceGroupLocation
+  resource_group_name = var.resourceGroupName
   server_name         = azurerm_sql_server.sbopsserver.name
   subnet_id           = var.subnet
 }
